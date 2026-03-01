@@ -3,10 +3,12 @@
 #include <stdlib.h>
 #include "include/linkedlist.h"
 #include "include/view.h"
+#include <mcheck.h>
 
 List alphabets[26];
 
 int main(){
+    mtrace();
     FILE *fptr = fopen("dbterms.txt", "r");
     char buf[64];
 

@@ -58,7 +58,7 @@ void free_list(List * lptr){
 
 int find_word_index(List alphabets[], char * word){
     if (word == NULL || !isalpha(word[0])) return -1;
-    int index = word[0] - 'a';
+    int index = tolower(word[0]) - 'a';
     return add_word_to_list(&alphabets[index], word);
 }
 
@@ -71,17 +71,21 @@ int delete_word(List alphabets[], char * word_to_delete){
     {
         if (strcmp(current->word, word_to_delete) == 0)
         {
+            NodePtr node_to_free = current;
             if (previous == NULL){
                 alphabets[index].head = current->next;
             } else {
                 previous->next = current->next;
             }
-            free(current);
+            current = current->next;
+            free(node_to_free);
             alphabets[index].size--;
+        } else {
+            previous = current;
+            current = current->next;
         }
-        previous = current;
-        current = current->next;
     }
+    printf("[!] Word not found");
 
     return 1;
 }
