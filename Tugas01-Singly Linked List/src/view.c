@@ -44,6 +44,12 @@ void handle_menu_option_2(){
     printf("[-] Masukkan Kata Yang Ingin Dihapus: ");
     char word[64];
     scanf(" %s", word);
-    delete_word(alphabets, word);
-    printf("[-] Kata %s Berhasil Dihapus Dari List!\n", word);
+    if ( delete_word(alphabets, word) == 1 )
+    {
+        printf("[-] Kata %s Berhasil Dihapus Dari List!\n", word);
+    } else {
+        printf("[!] Word Not FOund\n");
+    }
+    
+    
 }

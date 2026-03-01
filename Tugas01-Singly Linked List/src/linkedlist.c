@@ -64,6 +64,7 @@ int find_word_index(List alphabets[], char * word){
 
 int delete_word(List alphabets[], char * word_to_delete){
     int index = word_to_delete[0] - 'a';
+    int deleted = 0;
     NodePtr current = alphabets[index].head;
     NodePtr previous = NULL;
 
@@ -80,12 +81,14 @@ int delete_word(List alphabets[], char * word_to_delete){
             current = current->next;
             free(node_to_free);
             alphabets[index].size--;
+            deleted = 1;
         } else {
             previous = current;
             current = current->next;
         }
     }
-    printf("[!] Word not found");
 
-    return 1;
+    if (deleted == 1) { return 1; }
+
+    return 0;
 }
