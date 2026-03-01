@@ -1,2 +1,2 @@
 # Prof-Taufik-DSA-Assignment
-ni directory isinya tugas coolyeah
+ni directory isinya tugas coolyeah!
