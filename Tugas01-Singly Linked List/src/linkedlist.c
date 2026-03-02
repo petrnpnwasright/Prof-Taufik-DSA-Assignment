@@ -4,42 +4,10 @@
 #include <ctype.h>
 #include "../include/linkedlist.h"
 
+/*==== Initialize AND Free List Functions ====*/
 void init_list(List * lptr){
     lptr->head = NULL;
     lptr->size = 0;
-}
-
-int add_word_to_list(List * lptr, char *word){
-    NodePtr new;
-    new = malloc(sizeof(Node));
-
-    if (new == NULL)
-    {
-        printf("[!] Failed Allocating Memory\n");
-        return 0;
-    }
-    
-    strcpy(new->word, word);
-    new->next = lptr->head;
-    lptr->head = new;
-    lptr->size++;
-    return 1;
-}
-
-void display_list(List alphabets[], char letter){
-    int index = letter - 'a';
-    if (alphabets[index].head == NULL)
-    {
-        printf("Kata dengan huruf awal %c tidak ditemukan\n", index + 'a');
-        return;
-    }
-
-    NodePtr current = alphabets[index].head;
-    for (int i = 0; i < 25 && current != NULL; i++)
-    {
-        printf("%s -> ", current->word);      
-        current = current->next;
-    }
 }
 
 void free_list(List * lptr){
@@ -56,6 +24,7 @@ void free_list(List * lptr){
     lptr->size = 0;
 }
 
+/*==== Delete AND Add Function ====*/
 int find_word_index(List alphabets[], char * word){
     if (word == NULL || !isalpha(word[0])) return -1;
     int index = tolower(word[0]) - 'a';
@@ -92,3 +61,38 @@ int delete_word(List alphabets[], char * word_to_delete){
 
     return 0;
 }
+
+int add_word_to_list(List * lptr, char *word){
+    NodePtr new;
+    new = malloc(sizeof(Node));
+
+    if (new == NULL)
+    {
+        printf("[!] Failed Allocating Memory\n");
+        return 0;
+    }
+    
+    strcpy(new->word, word);
+    new->next = lptr->head;
+    lptr->head = new;
+    lptr->size++;
+    return 1;
+}
+
+/*==== Display List FUnction ====*/
+void display_list(List alphabets[], char letter){
+    int index = letter - 'a';
+    if (alphabets[index].head == NULL)
+    {
+        printf("Kata dengan huruf awal %c tidak ditemukan\n", index + 'a');
+        return;
+    }
+
+    NodePtr current = alphabets[index].head;
+    for (int i = 0; i < 25 && current != NULL; i++)
+    {
+        printf("%s -> ", current->word);      
+        current = current->next;
+    }
+}
+
