@@ -49,6 +49,22 @@ int pop( Stack * ps){
     return pop_value;
 }
 
+// Free stack
+void free_stack(Stack * ps) {
+    StackNodePtr current = ps->top;
+    StackNodePtr next;
+
+    while (current != NULL) {
+        next = current->next; 
+        free(current);        
+        current = next;      
+    }
+
+    ps->top = NULL; 
+    ps->size = 0;   
+}
+
+//
 int evaluatePostfixExpression(Stack * ps, char characters[]){
     int input_len = strlen(characters);
     char operator[] = "+-*/";
